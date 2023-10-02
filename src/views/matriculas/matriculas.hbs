@@ -1,0 +1,69 @@
+    <div class="container">
+        <div class="shadow-lg p-3 mb-5 bg-body rounded">
+            <h4>Datos de la matricula</h4>
+            <form action="/crear" method="POST">
+                <div class="col-md-6">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input id="nombre" name="nombre" type="text" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="edad" class="form-label">Edad</label>
+                    <input id="edad" name="edad" type="number" class="form-control" required>
+                </div>
+         </div> 
+                <button type="submit" class="w-100 btn btn-guardar btn-lg"><i class="bi bi-save"></i>Registrar Carga</button>
+            </form>
+            <!-- Tabla Matricula  -->
+            <table id="tablaMatricula" class="table mt-4">
+                <thead>
+                    <tr>
+                        <th style="display: none;">ID</th>
+                        <th>Nombre</th>
+                        <th>Edad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% Matriculas.forEach( (matricula) => { %>
+                        <tr>
+                            <td style="display: none;"><%= matricula._id %></td>
+                            <td><%= matricula.nombre %></td>
+                            <td><%= matricula.edad %></td>
+                            <td>
+                                <a type="button" class="btnEditar btn btn-outline-primary bi bi-pencil"></a>
+                                <a href="/borrar/<%= matricula._id %>" class="btn btn-outline-danger bi bi-trash"></a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+    </div>
+    
+    <!-- Modal para Editar   -->
+    <div id="modalMatricula" class="modal fade" tabindex="-1" aria-labelledby="modalMatricula" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+              <h5 class="modal-title" id="exampleModalLabel">Editar Info</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="/editar" method="POST">
+                  <input name="id_editar" id="id_editar" type="text" hidden>
+                <div class="mb-3">
+                  <label for="nombre_editar" class="col-form-label">Nombre:</label>
+                  <input id="nombre_editar" name="nombre_editar" type="text" class="form-control" value="">
+                </div>
+                <div class="mb-3">
+                  <label for="edad_editar" class="col-form-label">Edad:</label>
+                  <input id="edad_editar" name="edad_editar" type="number" class="form-control" value="">
+                </div>
+             
+            </div>
+            <div class="modal-footer">              
+              <button type="submit" class="btn btn-primary">Actualizar</button>
+            </div>
+          </form>
+          </div>
+        </div>
+    </div>
